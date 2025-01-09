@@ -1,0 +1,43 @@
+from lib.album import *
+
+
+class AlbumRepository:
+
+    def __init__(self, connection):
+        self._connection = connection
+
+    def all(self):
+        rows = self._connection.execute('SELECT * from albums ORDER BY id ASC')
+        #print(rows)
+        albums = []
+        for row in rows:
+            item = Album(row["id"], row["title"], row["release_year"], row["artist_id"])
+            albums.append(item)
+        return albums
+    
+    def find(self, parameter, column):
+        rows = self._connection.execute(f'SELECT * from albums WHERE {column} = %s', [parameter])
+        row = rows[0]
+        return Album(row["id"], row["title"], row["release_year"], row["artist_id"])
+        
+
+    def create_album(self, album):
+        self._connection.execute(
+            'INSERT INTO albums (title, release_year, artist_id) VALUES (%s, %s, %s)',
+            [album.title, album.release_year, album.artist_id])
+    
+    def delete_album(self, parameter, column):
+        self._connection.execute(
+            f'DELETE FROM albums WHERE {column} = %s', [parameter])
+        return None
+    
+    def update_album(self, album):
+        self._connection.execute('UPDATE albums SET title = %s, release_year = %s, artist_id = %s WHERE id = %s',
+                                 [album.title, album.release_year, album.artist_id, album.id]
+        )
+        return None
+    
+    def delete_all_albums(self):
+        self._connection.execute('DELETE FROM albums')
+        return 'All albums deleted successfuly!'
+        
