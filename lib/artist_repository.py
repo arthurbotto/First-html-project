@@ -19,14 +19,19 @@ class ArtistRepository:
     def find(self, parameter, column):
         rows = self._connection.execute(
             f'SELECT * from artists WHERE {column} = %s', [parameter])
+        if not rows:
+            return None
         row = rows[0]
         return Artist(row["id"], row["name"], row["genre"])
 
     
     def create(self, artist):
-        self._connection.execute('INSERT INTO artists (name, genre) VALUES (%s, %s)', [
+        rows = self._connection.execute(
+            'INSERT INTO artists (name, genre) VALUES (%s, %s) RETURNING id', [
                                  artist.name, artist.genre])
-        return None
+        row = rows[0]
+        artist.id = row["id"]
+        return artist
 
    
     def delete(self, parameter, column):

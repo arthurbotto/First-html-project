@@ -3,12 +3,35 @@
   <head>
     <title>Single Album</title>
     <meta charset="utf-8">
+    <style>
+      body {
+        background-color: black;
+        color: white;
+      }
+      a {
+        color: yellow;
+      }
+      a:visited {
+        color: rgb(237, 234, 9);
+      }
+      h1 {
+        color: rgb(11, 246, 62);}
+    </style>
   </head>
   <body>
     <h1>{{album.title}}</h1>
+    <p class="t-release_year">Released on: {{album.release_year}}</p><br>
+    <p class="t-artist_name">By: {{artist_name}}</p><br>
+    <p class="t-description">{{ album.description }}</p>
+
+    
+
+    <a href="/albums">Back to all albums</a>
+
     <p>
-        Release Year: {{album.release_year}}<br>
-        Artist: {{artist.name}}
+      <form action="/albums/{{album.id}}/delete" method="post">
+        <input type="submit" value="Delete Album">
+      </form>
     </p>
   </body>
 </html>

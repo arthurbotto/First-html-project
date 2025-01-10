@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Albums</title>
+    <meta charset="utf-8">
+    <style>
+      body {
+        background-color: black;
+        color: white;
+      }
+      a {
+        color: yellow;
+      }
+      a:visited {
+        color: rgb(237, 234, 9);
+      }
+      h1 {
+        color: rgb(190, 21, 103) }
+    </style>
+  </head>
+  <body>
+    <h1>Your Albums</h1>
+    <h2>Click on each album for more info</h2>
+
+    <ul>
+        {% for album in albums %}
+        <li>
+          <a href="/albums/{{album.id}}">Title: {{ album.title }}<br>
+          By: {{ album.artist_name }}<br><br></a>
+        </li>
+      {% endfor %}
+    </ul>
+    <a href="/artists">Go to artists main page</a><br><br>
+    <a href="/albums/new">Add a new album</a>
+
+  </body>
+</html>

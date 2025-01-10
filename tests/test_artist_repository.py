@@ -1,7 +1,7 @@
 from lib.artist_repository import ArtistRepository
 from lib.artist import Artist
 
-def test_get_all_records(db_connection): 
+def test_get_all_artists(db_connection): 
     db_connection.seed("seeds/music_library.sql") 
     repository = ArtistRepository(db_connection) 
 
@@ -15,15 +15,17 @@ def test_get_all_records(db_connection):
         Artist(4, 'Nothing But Thieves', 'Alternative Rock')
     ]
 
-def test_get_single_record(db_connection):
+def test_get_single_artist(db_connection):
     db_connection.seed("seeds/music_library.sql")
     repository = ArtistRepository(db_connection)
 
     artist = repository.find(3, 'id')
     assert artist == Artist(3, "Arctic Monkeys", "Indie Rock")
+    artist2 = repository.find(12, 'id')
+    assert artist2 == None
 
 
-def test_create_record(db_connection):
+def test_create_artist(db_connection):
     db_connection.seed("seeds/music_library.sql")
     repository = ArtistRepository(db_connection)
 
@@ -38,7 +40,7 @@ def test_create_record(db_connection):
         Artist(5, "The Beatles", "Rock"),
     ]
 
-def test_delete_record(db_connection):
+def test_delete_artist(db_connection):
     db_connection.seed("seeds/music_library.sql")
     repository = ArtistRepository(db_connection)
     repository.delete(3, 'id') 
@@ -50,7 +52,7 @@ def test_delete_record(db_connection):
         Artist(4, 'Nothing But Thieves', 'Alternative Rock')
     ]
 
-def test_update_record(db_connection):
+def test_update_artist(db_connection):
     db_connection.seed("seeds/music_library.sql")
     repository = ArtistRepository(db_connection)
     artist = repository.find(4, "id")

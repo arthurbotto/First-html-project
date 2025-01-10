@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Single Artist</title>
+    <meta charset="utf-8">
+    <style>
+      body {
+        background-color: black;
+        color: white;
+      }
+      a:visited {
+        color: rgb(241, 237, 7);
+      }
+      h1 {
+        color: rgb(200, 4, 214);}
+    </style>
+  </head>
+  <body>
+    <h1>{{artist.name}}</h1>
+    <h2>Genre: {{ artist.genre }}</h2>
+    <p class="t-id">ID: {{ artist.id }}</p>
+    <a href="/artists">Back to all artists</a>
+
+    <p>
+      <form action="/artists/{{artist.id}}/delete" method="post">
+        <input type="submit" value="Delete Artist">
+      </form>
+    </p>
+  </body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Artists</title>
+    <meta charset="utf-8">
+    <style>
+    body {
+        background-color: black;
+        color: white;
+      }
+      a {
+        color: yellow;
+      }
+      a:visited {
+        color: rgb(237, 234, 9);
+      }
+      h1 {
+        color: rgb(4, 239, 4)}
+    </style>
+  </head>
+  <body>
+    <h1>New Artist</h1>
+    <!-- This creates a form that will submit to POST /books -->
+    <form action="/artists" method="post">
+
+      <!-- We check to see if there are any errors from a previous submission -->
+      {% if errors %}
+        <!-- If so, we show them. -->
+        <p class="t-errors">
+          There were errors with your submission: {{ errors }}
+        </p>
+      {% endif %}
+
+      <p>
+        
+        <label for="name">Name</label>
+
+        <input type="text" name="name" id="name">
+      </p>
+      <p>
+        <label for="genre">Genre</label>
+        <input type="text" name="genre" id="genre">
+      </p>
+     
+        <!-- `type` is submit here, to indicate it is a button -->
+        <!-- `value` is used as the button's text -->
+        <input type="submit" value="Create Artist">
+      </p>
+    </form>
+  </body>
+</html>
