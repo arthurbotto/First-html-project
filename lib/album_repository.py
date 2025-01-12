@@ -1,5 +1,4 @@
 from lib.album import *
-#from album import *
 
 
 
@@ -50,6 +49,5 @@ class AlbumRepository:
     def delete_all_albums(self):
         self._connection.execute('DELETE FROM albums')
         return 'All albums deleted successfuly!'
+   
     
-    
-        

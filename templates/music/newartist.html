@@ -27,7 +27,7 @@
       {% if errors %}
         <!-- If so, we show them. -->
         <p class="t-errors">
-          There were errors with your submission: {{ errors }}
+          There were errors with your submission: {{ errors|e }}
         </p>
       {% endif %}
 

@@ -61,7 +61,7 @@ def test_create_album_error(db_connection, page, test_web_address):
     page.click("text=Add a new album")
     page.click("text=Create Album")
     errors = page.locator(".t-errors")
-    expect(errors).to_have_text("There were errors with your submission: Title can't be blank, Release year can't be blank, Description can't be blank, artist id can't be blank")
+    expect(errors).to_have_text("There were errors with your submission: Title can't be blank, Release year can't be blank and has to be a number, Description can't be blank, Artist id can't be blank and has to be a number (check number at artist page)")
 
     
 

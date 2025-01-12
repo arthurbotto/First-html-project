@@ -16,9 +16,9 @@
     </style>
   </head>
   <body>
-    <h1>{{artist.name}}</h1>
-    <h2>Genre: {{ artist.genre }}</h2>
-    <p class="t-id">ID: {{ artist.id }}</p>
+    <h1>{{artist.name|e }}</h1>
+    <h2>Genre: {{ artist.genre|e }}</h2>
+    <p class="t-id">ID: {{ artist.id|e }}</p>
     <a href="/artists">Back to all artists</a>
 
     <p>

@@ -1,8 +1,10 @@
 import os
 from flask import Flask, redirect, request, render_template, url_for
 from lib.album import Album
+from lib.album_validator import *
 from lib.album_repository import AlbumRepository
 from lib.artist import Artist
+from lib.artist_validator import *
 from lib.artist_repository import ArtistRepository
 from lib.database_connection import get_flask_database_connection
 
@@ -17,13 +19,24 @@ def get_emoji():
 def create_album():
     connection = get_flask_database_connection(app)
     repository = AlbumRepository(connection)
-    title = request.form['title']
-    release_year = request.form['release_year']
-    description = request.form['description']
-    artist_id = request.form['artist_id']
-    album = Album(None, title, release_year, description, artist_id)
-    if not album.is_valid():
-        return render_template('music/newalbum.html', album=album, errors=album.generate_errors()), 400
+
+    validator = AlbumParamValidator(
+        request.form['title'],
+        request.form['release_year'],
+        request.form['description'],
+        request.form['artist_id'])
+    
+    if not validator.is_valid():
+        errors = validator.generate_errors()
+        return render_template('music/newalbum.html', errors=errors)
+
+    
+    album = Album(
+        None,
+        validator.get_valid_title(),
+        validator.get_valid_release_year(),
+        validator.get_valid_description(),
+        validator.get_valid_artist_id())
     album = repository.create_album(album)
     return redirect(f"/albums/{album.id}") 
 
@@ -86,11 +99,20 @@ def get_artist(id):
 def create_artist():
     connection = get_flask_database_connection(app)
     repo = ArtistRepository(connection)
-    name = request.form['name']
-    genre = request.form['genre']
-    artist = Artist(None, name, genre)
-    if not artist.is_valid():
-        return render_template('music/newalbum.html', artist=artist, errors=artist.generate_errors()), 400
+    validator2 = ArtistParamValidator(
+        request.form['name'],
+        request.form['genre'])
+    
+    if not validator2.is_valid():
+        errors = validator2.generate_errors()
+        return render_template('music/newartist.html', errors=errors)
+
+    
+    artist = Artist(
+        None,
+        validator2.get_valid_name(),
+        validator2.get_valid_genre())
+    
     artist = repo.create(artist)
     return redirect(f"/artists/{artist.id}") 
 

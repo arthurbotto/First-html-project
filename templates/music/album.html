@@ -19,10 +19,10 @@
     </style>
   </head>
   <body>
-    <h1>{{album.title}}</h1>
-    <p class="t-release_year">Released on: {{album.release_year}}</p><br>
-    <p class="t-artist_name">By: {{artist_name}}</p><br>
-    <p class="t-description">{{ album.description }}</p>
+    <h1>{{album.title|e }}</h1>
+    <p class="t-release_year">Released on: {{album.release_year|e }}</p><br>
+    <p class="t-artist_name">By: {{artist_name|e }}</p><br>
+    <p class="t-description">{{ album.description|e }}</p>
 
     
 

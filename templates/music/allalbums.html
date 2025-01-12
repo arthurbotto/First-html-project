@@ -22,16 +22,18 @@
     <h1>Your Albums</h1>
     <h2>Click on each album for more info</h2>
 
-    <ul>
+    <ol>
         {% for album in albums %}
         <li>
-          <a href="/albums/{{album.id}}">Title: {{ album.title }}<br>
-          By: {{ album.artist_name }}<br><br></a>
+          <a href="/albums/{{album.id}}">Title: {{ album.title|e }}<br>
+          By: {{ album.artist_name|e }}<br><br></a>
         </li>
       {% endfor %}
-    </ul>
+    </ol>
     <a href="/artists">Go to artists main page</a><br><br>
     <a href="/albums/new">Add a new album</a>
+
+    
 
   </body>
 </html>
